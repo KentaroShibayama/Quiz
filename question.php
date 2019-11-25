@@ -1,11 +1,5 @@
 <?php
-//require_once('common.php');
-$question = [
-    ["富士山の標高は何メートル？",3776],
-    ["パンはパンでも食べられないパンは？",'フライパン'],
-    ["下は大火事、上は洪水、それなんだ？",'風呂']
-    ];
-
+require_once('common.php');
     $i = rand(0,count($question)-1);
 ?>
 <!DOCTYPE html>
@@ -19,8 +13,23 @@ $question = [
         <?= $question[$i][0] ?>
         <form action="result.php">
             <input type="hidden" name="qid" value="<?= $i ?>">
-            <input type="text" name="answer">
-            <button>回答</button>
+            <input type="text" id="text-answer" name="answer">
+
+            <button id="btn-answer">回答</button>
         </form>
+
+    <script>
+        document.querySelector("#btn-answer").addEventListener("click", (event)=>{
+            let answer = document.querySelector("#text-answer");
+            if(answer.value == ""){
+                alert("入力してください");
+                answer.focus();
+                answer.style.backgroundColor = "Pink";
+                event.preventDefault();
+            }else{
+                document.querySelector("#btn-answer").innerHTML = "...送信中";
+            }
+        });
+    </script>
     </body>
 </html>
